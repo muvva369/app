@@ -1,0 +1,29 @@
+var dal = require('./DAL');
+var busLog = {};
+
+
+
+busLog.loginUser = function (username, password) {
+    return dal.userLogin(username, password)
+        .then(function (response) {
+            return response;
+        })
+}
+
+
+
+busLog.signupUser = function (credentials) {
+    return dal.signupUser(credentials)
+        .then(function (item) {
+            return item;
+        })
+}
+
+busLog.getBooks = function(type){
+    return dal.getBooks(type)
+        .then(function (item) {
+            return item;
+        })
+}
+
+module.exports = busLog;
