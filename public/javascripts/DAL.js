@@ -30,7 +30,7 @@ bookDAL.userLogin = function (username, password) {
 
 bookDAL.signupUser = function (credentials){
     console.log("in dal signup")
-    return MongoClient.connect(connUrl)
+    return MongoClient.connect(connectionUrl)
             .then(function(client){
                 var collect = client.collection("book_users");
                 return collect.insert(credentials)
@@ -48,7 +48,7 @@ bookDAL.signupUser = function (credentials){
 
 bookDAL.getBooks = function(type){
     console.log("in getbooks of dal"+type)
-    return MongoClient.connect(connUrl)
+    return MongoClient.connect(connectionUrl)
             .then(function(client){
                 var collect=client.collection(type);
                 return collect.find().toArray()
