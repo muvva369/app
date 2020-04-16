@@ -3,8 +3,8 @@ var busLog = {};
 
 
 
-busLog.loginUser = function (username, password) {
-    return dal.userLogin(username, password)
+busLog.loginUser = function (empId,password) {
+    return dal.userLogin(empId,password)
         .then(function (response) {
             return response;
         })
