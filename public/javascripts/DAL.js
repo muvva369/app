@@ -3,7 +3,7 @@ var connectionUrl="mongodb://localhost:27017/bookstore";
 //var collectionName="book_users";
 var bookDAL = {};
 
-bookDAL.userLogin = function (username, password) {
+bookDAL.userLogin = function (empId,password) {
     
     console.log("in login DAL")
 
@@ -11,16 +11,19 @@ bookDAL.userLogin = function (username, password) {
             .then(function (client){
                 var collection = client.collection("book_users");
 
-                return collection.find({"uname":username,"pass":password}).toArray()
+                return collection.find({"empId":empId,"password":password}).toArray()
                         .then(function(response){
                             if(response.length==1){
                                 client.close();
                                 console.log("correct credentials")
                                 console.log(response)
-                                return true;
+                                return "Login Successful";
                             }
                             else {
-                                return false;
+                                var err= new Error();
+                                err.status=404;
+                                err.message="Login failed!"
+                                throw err
                             }
                         });
             });
