@@ -5,14 +5,18 @@ var busLog=require('../public/javascripts/BL.js');
 
 
 
-routing.post('/login',function(request,response,next){
-    var username=request.body.username;
+routing.post('/employee/verify',function(request,response,next){
+    var empId=request.body.empId;
     var password=request.body.password;
-    return busLog.loginUser(username,password)
+    return busLog.loginUser(empId,password)
             .then(function(data){
                 response.json(data);
             }).catch(function (error){
-                next(error);
+                if(error.status=404){
+                    response.json(error)
+                }else{
+                    next(error);
+                }
             });
 });
 
